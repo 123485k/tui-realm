@@ -1,50 +1,19 @@
-[package]
-name = "tuirealm"
-version = "2.0.3"
-authors = ["Christian Visintin"]
-edition = "2021"
-categories = ["command-line-utilities"]
-description = "A tui-rs framework to build tui interfaces, inspired by React and Elm."
-documentation = "https://docs.rs/tuirealm"
-homepage = "https://github.com/veeso/tui-realm"
-include = ["examples/**/*", "src/**/*", "LICENSE", "README.md", "CHANGELOG.md"]
-keywords = ["tui", "terminal"]
+[workspace]
+members = ["crates/*"]
+resolver = "2"
+
+[workspace.package]
+authors = [
+  "Christian Visintin <christian.visintin@veeso.dev>",
+  "hasezoey <hasezoey@gmail.com>",
+]
+edition = "2024"
 license = "MIT"
-readme = "README.md"
+rust-version = "1.88"
 repository = "https://github.com/veeso/tui-realm"
+homepage = "https://github.com/veeso/tui-realm"
 
-[dependencies]
-bitflags = "2"
-crossterm = { version = "0.28", optional = true }
-lazy-regex = "3"
-ratatui = { version = "0.28", default-features = false }
-serde = { version = "^1", features = ["derive"], optional = true }
-termion = { version = "^4", optional = true }
-thiserror = "1"
-tuirealm_derive = { version = "2", optional = true }
-
-[dev-dependencies]
-pretty_assertions = "^1"
-toml = "^0.8"
-tempfile = "^3"
-
-[features]
-default = ["derive", "crossterm"]
-derive = ["dep:tuirealm_derive"]
-serialize = ["dep:serde", "bitflags/serde"]
-crossterm = ["dep:crossterm", "ratatui/crossterm"]
-termion = ["dep:termion", "ratatui/termion"]
-
-[[example]]
-name = "demo"
-path = "examples/demo/demo.rs"
-required-features = ["crossterm"]
-
-[[example]]
-name = "user-events"
-path = "examples/user_events/user_events.rs"
-required-features = ["crossterm"]
-
-[package.metadata.docs.rs]
-all-features = true
-rustdoc-args = ["--cfg", "docsrs"]
+[workspace.dependencies]
+tuirealm = { path = "./crates/tuirealm", version = "4", default-features = false }
+tui-realm-stdlib = { path = "./crates/tuirealm-stdlib", version = "4" }
+tuirealm_derive = { path = "./crates/tuirealm-derive", version = "4" }
